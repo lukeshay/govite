@@ -21,9 +21,7 @@ jobs:
           - go test ./...
           - bun run format
           - bun run build
-          - |
-            curl https://raw.githubusercontent.com/lukeshay/gocden/main/install.sh | bash
-            ./gocden/gocden build
+          - curl https://raw.githubusercontent.com/lukeshay/gocden/main/run.sh | bash -s -- build
     steps:
       - uses: actions/checkout@v3
         with:
