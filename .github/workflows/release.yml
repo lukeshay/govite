@@ -40,6 +40,9 @@ jobs:
         with:
           name: docs
           path: _site
+      - uses: jdx/mise-action@v2
+      - run: go mod download
+      - run: bun install
       - run: cog bump --${{ inputs.bump_type }}
       - run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
         id: tag
