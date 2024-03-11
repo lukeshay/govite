@@ -46,12 +46,11 @@ jobs:
       - run: cog changelog --at ${{ steps.tag.outputs.tag }} > CHANGELOG.md
       - run: zip -r docs.zip _site
       - run: |
-          cd packages/govite
           export TMP=$(mktemp)
-          jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > $TMP
-          mv $TMP package.json
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish
+          jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' packages/govite/package.json > $TMP
+          mv $TMP packages/govite/package.json
+          npm config set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
+          npm publish -w govite
       - run: git add . && cog commit chore "Release ${{ steps.tag.outputs.tag }}"
       - run: bun run deploy --branch main
         env:
