@@ -1,5 +1,5 @@
-# gelte
+# Go Vite
 
-[![release](https://github.com/lukeshay/gelte/actions/workflows/release.yml/badge.svg)](https://github.com/lukeshay/gocden/actions/workflows/release.yml) [![CodeQL](https://github.com/lukeshay/gocden/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/lukeshay/gocden/actions/workflows/github-code-scanning/codeql)
+[![release](https://github.com/lukeshay/govite/actions/workflows/release.yml/badge.svg)](https://github.com/lukeshay/govite/actions/workflows/release.yml) [![CodeQL](https://github.com/lukeshay/govite/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/lukeshay/govite/actions/workflows/github-code-scanning/codeql)
 
-A simple markdown documentation generator written in Go. Read the [documentation](https://lukeshay.github.io/gelte) for more information.
+A Golang library for SSR with Vite.
