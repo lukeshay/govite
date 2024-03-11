@@ -37,9 +37,8 @@ jobs:
       - run: |
           cd packages/govite
           jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > package.json
+          npm config set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
           npm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: git add . && cog commit chore "Release ${{ steps.tag.outputs.tag }}"
       - run: bun run deploy --branch main
         env:
