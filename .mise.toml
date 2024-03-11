@@ -1,0 +1,5 @@
+[tools]
+go = "1.22"
+node = "20"
+staticcheck = "latest"
+bun = "latest"

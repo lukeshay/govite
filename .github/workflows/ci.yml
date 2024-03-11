@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  workflow_call:
+    inputs:
+      save_docs:
+        type: boolean
+        default: false
+        description: Whether or not to save docs to artifacts
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd:
+          - staticcheck ./...
+          - gofmt -e -s .
+          - go vet ./...
+          - go test ./...
+          - bun run format
+          - bun run build
+          - curl https://raw.githubusercontent.com/lukeshay/gocden/main/run.sh | bash -s -- build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: jdx/mise-action@v2
+      - run: go mod download
+      - run: bun install
+      - run: ${{ matrix.cmd }}
+      # if matrix.cmd starts with
+      - if: startsWith(${{ matrix.cmd }}, 'curl') && ${{ inputs.save_docs }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: _site

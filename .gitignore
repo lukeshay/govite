@@ -1,0 +1,10 @@
+*.log*
+.DS_Store
+.env*
+.gelte/
+.turbo/
+.vscode/
+_site/
+dist/
+node_modules/
+CHANGELOG.md

@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+    with:
+      save_docs: true
+  release:
+    runs-on: ubuntu-22.04
+    needs:
+      - verify
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oknozor/cocogitto-action@v3
+        with:
+          git-user: "Cog Bot"
+          check-latest-tag-only: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: docs
+      - run: cog bump --auto
+      - run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+        id: tag
+      - run: cog changelog --at ${{ steps.tag.outputs.tag }} > CHANGELOG.md
+      - run: zip -r docs.zip _site
+      - run: |
+          cd packages/govite
+          jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > package.json
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: git add . && cog commit chore "Release ${{ steps.tag.outputs.tag }}"
+      - run: bun run deploy --branch main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - run: git push && git push --tags
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: CHANGELOG.md
+          tag_name: ${{ steps.tag.outputs.tag }}
+          files: |
+            CHANGELOG.md
+            README.md
+            LICENSE
+            docs.zip
+          discussion_category_name: Announcements

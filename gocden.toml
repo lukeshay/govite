@@ -1,0 +1,22 @@
+name = 'Go Vite'
+description = 'Documentation for the Golang Vite.js adapter'
+url = 'https://govite.lshay.land/'
+
+[social]
+twitter = ''
+facebook = ''
+instagram = ''
+linkedin = ''
+github = ''
+gitlab = ''
+bitbucket = ''
+
+[build]
+src = 'docs'
+out = '_site'
+
+[options]
+ordering = true
+
+[serve]
+port = 7153
