@@ -1,0 +1,28 @@
+from_latest_tag = false
+ignore_merge_commits = false
+disable_changelog = false
+generate_mono_repository_global_tag = true
+branch_whitelist = ["main"]
+tag_prefix = "v"
+skip_ci = "[skip ci]"
+skip_untracked = false
+pre_bump_hooks = ["go mod tidy", "echo 'bump to {{version}}'"]
+post_bump_hooks = []
+pre_package_bump_hooks = []
+post_package_bump_hooks = []
+
+[git_hooks]
+
+[commit_types]
+
+[changelog]
+template = "remote"
+remote = "github.com"
+repository = "govite"
+owner = "lukeshay"
+path = "CHANGELOG.md"
+authors = [{ signature = "Luke Shay", username = "lukeshay" }]
+
+[bump_profiles]
+
+[packages]
