@@ -47,7 +47,9 @@ jobs:
       - run: zip -r docs.zip _site
       - run: |
           cd packages/govite
-          jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > package.json
+          export TMP=$(mktemp)
+          jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > $TMP
+          mv $TMP package.json
           npm config set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
           npm publish
       - run: git add . && cog commit chore "Release ${{ steps.tag.outputs.tag }}"

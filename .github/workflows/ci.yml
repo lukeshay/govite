@@ -23,7 +23,7 @@ jobs:
           - bun run build
           - curl https://raw.githubusercontent.com/lukeshay/gocden/main/run.sh | bash -s -- build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: jdx/mise-action@v2
