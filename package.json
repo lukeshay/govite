@@ -8,7 +8,7 @@
 	"scripts": {
 		"format": "prettier --ignore-path .gitignore --check --write .",
 		"build": "turbo build",
-		"deploy": "wrangler pages deploy _site"
+		"deploy": "wrangler pages deploy _site --project-name govite"
 	},
 	"prettier": "@lshay/prettier-config",
 	"devDependencies": {
