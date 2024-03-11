@@ -50,7 +50,7 @@ jobs:
           export TMP=$(mktemp)
           jq --arg version "$(echo "${{ steps.tag.outputs.tag }}" | sed 's/v//')" '.version |= $version' package.json > $TMP
           mv $TMP package.json
-          npm config set --global "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm publish
       - run: git add . && cog commit chore "Release ${{ steps.tag.outputs.tag }}"
       - run: bun run deploy --branch main
