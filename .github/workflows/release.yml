@@ -2,6 +2,16 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      bump_type:
+        type: choice
+        default: auto
+        description: The type of version bump
+        options:
+          - auto
+          - patch
+          - minor
+          - major
 
 permissions:
   contents: write
@@ -30,7 +40,7 @@ jobs:
         with:
           name: docs
           path: _site
-      - run: cog bump --auto
+      - run: cog bump --${{ inputs.bump_type }}
       - run: echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
         id: tag
       - run: cog changelog --at ${{ steps.tag.outputs.tag }} > CHANGELOG.md
