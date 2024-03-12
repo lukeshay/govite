@@ -1,44 +1,44 @@
 {
-	"name": "@govite/govite",
-	"version": "0.0.1",
-	"type": "module",
-	"publishConfig": {
-		"access": "public",
-		"tag": "latest",
-		"registry": "https://registry.npmjs.org"
-	},
-	"license": "Apache-2.0",
-	"homepage": "https://govite.lshay.land/",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/lukeshay/govite"
-	},
-	"keywords": [
-		"vite",
-		"vitejs",
-		"go",
-		"golang",
-		"ssr"
-	],
-	"files": [
-		"src"
-	],
-	"exports": {
-		".": "./src/index.js",
-		"./server": "./src/server.js"
-	},
-	"scripts": {
-		"build": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@tsconfig/node20": "^20.1.2",
-		"typescript": "^5.4.2",
-		"vite": "^5.1.5"
-	},
-	"dependencies": {
-		"express": "^4.18.3"
-	},
-	"peerDependencies": {
-		"vite": "^5.0.0"
-	}
+  "name": "@govite/govite",
+  "version": "0.0.2",
+  "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest",
+    "registry": "https://registry.npmjs.org"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://govite.lshay.land/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukeshay/govite"
+  },
+  "keywords": [
+    "vite",
+    "vitejs",
+    "go",
+    "golang",
+    "ssr"
+  ],
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./server": "./src/server.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0"
+  }
 }
