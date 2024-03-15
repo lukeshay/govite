@@ -15,7 +15,7 @@ import (
 	"github.com/lukeshay/govite/pkg/utils/nodejs"
 )
 
-const devServerJs = "import  'govite/server'"
+const devServerJs = "import  '@govite/govite/server'"
 
 type DevelopmentEngineOptions struct {
 	// The relative or absolute path to the directory of your vite project.
